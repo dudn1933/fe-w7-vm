@@ -1,9 +1,10 @@
-import Component from '../core/Component.js';
+import Component from '../../core/Component.js';
 import Product from './Product.js';
+
 export default class ProductView extends Component {
   selectPropsToUse() {
-    const { sample } = this.props;
-    this.selfProps = { sample };
+    const { menulist } = this.props;
+    this.selfProps = { menulist };
   }
   getTemplate() {
     return `
@@ -11,11 +12,11 @@ export default class ProductView extends Component {
     `;
   }
   mountComponents() {
-    const { sample } = this.selfProps;
-    sample.forEach((el) => {
+    const { menulist } = this.selfProps;
+    menulist.forEach((el) => {
       this.createComponent(Product, '.menu_line', () => {
-        const { title, count, price } = el;
-        return { title, count, price };
+        const { title, price, count } = el;
+        return { title, price, count };
       });
     });
   }

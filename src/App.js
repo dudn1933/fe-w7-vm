@@ -1,10 +1,11 @@
 import Deact from './javascript/core/Deact.js';
-import { sample } from './javascript/utill_list.js';
-import ProductView from './javascript/components/ProductView.js';
+import { menuList } from './javascript/utill_list.js';
+import ProductView from './javascript/components/Product/ProductView.js';
+
 export default class App extends Deact {
   setup() {
     this.state = {
-      sample: sample(),
+      menulist: menuList(),
     };
   }
   getTemplate() {
@@ -16,9 +17,9 @@ export default class App extends Deact {
   }
   mountComponents() {
     this.createComponent(ProductView, '#product_view', () => {
-      const { sample } = this.state;
+      const { menulist } = this.state;
       return {
-        sample,
+        menulist,
       };
     });
   }

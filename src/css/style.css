@@ -1,4 +1,4 @@
-#entire_box {
+.entire_box {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -12,6 +12,7 @@
 }
 
 .menu_line {
+    display: flex;
   box-sizing: border-box;
   width: 100%;
   list-style: none;
