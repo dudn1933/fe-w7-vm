@@ -95,8 +95,25 @@
 
 - Deact 개발 (View, Model)
 
+### 화요일
 
+#### 펭
 
+- html,css 기초 작업
+
+#### ㄷ
+
+- Deact 개발 (완료)
+
+### 수요일
+
+#### 펭
+
+- product view 담당
+
+#### ㄷㄷ 
+
+- wallet 담당 
 
 
 
