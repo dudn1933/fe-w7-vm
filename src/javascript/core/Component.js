@@ -2,7 +2,7 @@ export default class Component {
   constructor($newtarget, newProps) {
     this.$target = null;
     this.selfProps = null;
-    this.$self = document.createElement("div");
+    this.$self = document.createElement('div');
     this.children = [];
     this.render($newtarget, newProps);
     // this.mountComponents();
@@ -34,7 +34,7 @@ export default class Component {
     }
 
     if (isDiffProps) {
-      this.$self.innerHTML = this.getTemplate();
+      this.$self.outerHTML = this.getTemplate();
       this.mountComponents();
     }
     // this.reRenderChildren();
@@ -78,7 +78,7 @@ export default class Component {
   deepCopy(obj) {
     const clone = {};
     for (let key in obj) {
-      if (typeof obj[key] == "object" && obj[key] != null) {
+      if (typeof obj[key] == 'object' && obj[key] != null) {
         clone[key] = this.deepCopy(obj[key]);
       } else {
         clone[key] = obj[key];

@@ -1,61 +1,25 @@
-import Utill from './javascript/utill_list.js';
-
-class App {
-  constructor(props) {
-    // super(props);
+import Deact from './javascript/core/Deact.js';
+import { sample } from './javascript/utill_list.js';
+import ProductView from './javascript/components/ProductView.js';
+export default class App extends Deact {
+  setup() {
     this.state = {
-      money: new Utill().Money_list(),
-      menu: new Utill().Menu_list(),
-      ALL_money: new Utill()
-        .Money_list()
-        .map((v) => Number(v.title.replace(/[^0-9]/g, '') * v.count))
-        .reduce((acc, cur) => (acc = acc + cur)),
+      sample: sample(),
     };
   }
-  render() {
-    return [this.state.money, this.state.menu, this.state.ALL_money];
+  getTemplate() {
+    return `
+     <div id="product_view"></div>
+     <div id="screen_view"></div>
+     <div id="wallet_view"></div>
+    `;
+  }
+  mountComponents() {
+    this.createComponent(ProductView, '#product_view', () => {
+      const { sample } = this.state;
+      return {
+        sample,
+      };
+    });
   }
 }
-
-const test = new App();
-
-console.log(test.render());
-
-export default App;
-
-// import Deact from "./core/Deact3.js";
-// import { _ } from "./utils/dom.js";
-// export default class App extends Deact {
-//   setup() {
-//     this.state = {
-//     };
-//   }
-//   setPropsFromState() {
-//     const { sample, dd } = this.state;
-//     this.props = {
-//       sample,
-//       dd,
-//     };
-//   }
-//   getTemplate() {
-//     const { sample, dd } = this.props;
-//     return `
-//             <header>${dd}의 ${sample} Page</header>
-//             <div id="raccoon"></div>
-//         `;
-//   }
-//   mountComponents() {
-//     this.createComponent(Raccoon, "#raccoon", () => {
-//       const { raccoon, pengdori } = this.state;
-//       return {
-//         raccoon,
-//         pengdori,
-//         changeHeaderName: this.changeHeaderName.bind(this),
-//       };
-//     });
-//   }
-//   changeHeaderName() {
-//     const { pengdori } = this.state;
-//     this.updateState({ pengdori: !pengdori });
-//   }
-// }
