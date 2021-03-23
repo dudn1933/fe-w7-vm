@@ -1,6 +1,4 @@
 import MainService from './mainService.js';
-import '../css/style.scss';
-import '../css/style.css';
 
 window.addEventListener('DOMContentLoaded', () => {
   const targetEl = document.querySelector('#log');
