@@ -1,4 +1,5 @@
 import Deact from './javascript/core/Deact.js';
+import { _ } from './javascript/utils/dom.js';
 import { menuList, sumMoney, moneyList } from './javascript/utill_list.js';
 import ProductView from './javascript/components/Product/ProductView.js';
 import ScreenView from './javascript/components/Screen/ScreenView.js';
@@ -10,6 +11,7 @@ export default class App extends Deact {
       menulist: menuList(),
       summoney: sumMoney(),
       moneylist: moneyList(),
+      selectMoney: 0,
     };
   }
 
@@ -22,30 +24,48 @@ export default class App extends Deact {
   }
 
   mountComponents() {
-    const { payMoney } = this;
+    const { payMoney, changeMoney } = this;
     this.createComponent(ProductView, '#Product_view', () => {
       const { menulist } = this.state;
       return { menulist };
     });
 
     this.createComponent(ScreenView, '#Screen_view', () => {
-      const { summoney } = this.state;
-      return { summoney };
+      const { selectMoney } = this.state;
+      return { selectMoney };
     });
 
     this.createComponent(WalletView, '#Wallet_view', () => {
       const { moneylist } = this.state;
-      return { moneylist, payMoney: payMoney.bind(this) };
+      const totalMoney = () => {
+        const total = this.state.moneylist.reduce((total, money) => {
+          return total + money.title * money.count;
+        }, 0);
+        return total;
+      };
+      return {
+        moneylist,
+        payMoney: payMoney.bind(this),
+        changeMoney: changeMoney.bind(this),
+        totalMoney,
+      };
     });
   }
+
   payMoney(type) {
     const { moneylist } = this.state;
     for (const money of moneylist) {
       if (money.title === type) {
         money.count--;
+        // this.state.selectMoney.push(money.title);
       }
-      ``;
     }
     this.updateState({ moneylist });
+  }
+
+  changeMoney(type) {
+    let { selectMoney } = this.state;
+    selectMoney += Number(type);
+    this.updateState({ selectMoney });
   }
 }
