@@ -11,7 +11,7 @@ export default class Wallet extends Component {
       return total + money.title * money.count;
     }, 0);
     return `
-        <div class="wallet_total">${total}</div>
+        <div class="total_money">${total}</div>
       `;
   }
 }

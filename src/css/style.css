@@ -13,6 +13,11 @@
   border: 1px solid black;
 }
 
+#Product_view > div {
+  width: 100%;
+  display: flex;
+}
+
 .menu_line {
   display: grid;
   justify-content: center;
@@ -33,21 +38,29 @@
   box-sizing: border-box;
   border: 1px solid black;
   width: 100%;
-  height: 40px;
+  height: 50px;
   align-items: center;
   justify-content: center;
+  border-radius: 10px;
 }
 
 .menu_price {
   box-sizing: border-box;
+  padding-top: 6px;
   width: 100%;
 }
 
 #Screen_view {
+  display: flex;
+  align-items: center;
   width: 33.3%;
   height: 500px;
   text-align: -webkit-center;
   border: 1px solid black;
+}
+
+#Screen_view > div {
+  width: 100%;
 }
 
 .won_screen {
@@ -88,13 +101,26 @@
   text-align: center;
 }
 
+#Wallet_view > div {
+  width: 100%;
+  box-sizing: border-box;
+  text-align: -webkit-center;
+}
+
 .wallet_line {
   display: grid;
   width: 100%;
   justify-items: center;
-  grid-template-columns: 50% 50%;
+  box-sizing: border-box;
+  grid-template-columns: 100%;
   list-style: none;
   padding: 0 10px;
+  margin: 10px 0 0 0;
+}
+
+.wallet_line > li {
+  display: flex;
+  width: 100%;
 }
 
 .coin {
@@ -108,7 +134,7 @@
   outline: none;
   border: 2px solid black;
   box-sizing: border-box;
-  margin: 10px 0;
+  margin: 10px 5px;
 }
 .coin_count {
   display: flex;
@@ -119,5 +145,17 @@
   border: 2px solid black;
   border-radius: 10px;
   box-sizing: border-box;
-  margin: 10px 0;
+  margin: 10px 5px;
+}
+
+.wallet_total {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 50px;
+  border: 2px solid black;
+  margin: 5px;
+  box-sizing: border-box;
+  border-radius: 10px;
 }
