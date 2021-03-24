@@ -176,3 +176,7 @@
   border: 5px solid red;
   pointer-events: none;
 }
+.expensive {
+  opacity: 0.5;
+  pointer-events: none;
+}
