@@ -1,8 +1,8 @@
 export default class Component {
-  constructor($newtarget, newProps) {
+  constructor($newtarget, newProps, tagName) {
     this.$target = null;
     this.selfProps = null;
-    this.$self = document.createElement('div');
+    this.$self = document.createElement(tagName);
     this.children = [];
     this.render($newtarget, newProps);
     this.setEventLinstener();
@@ -33,10 +33,10 @@ export default class Component {
     }
 
     if (isDiffProps) {
-      this.$target.innerHTML = this.getTemplate();
+      this.$self.innerHTML = this.getTemplate();
       this.mountComponents();
     }
-    // this.reRenderChildren();
+    this.reRenderChildren();
   }
   isDiffTarget($newTarget) {
     return this.$target !== $newTarget;
@@ -49,10 +49,10 @@ export default class Component {
     return JSON.stringify(prevProps) !== JSON.stringify(nextProps);
   }
 
-  createComponent(Constructor, targetSelector, getProps) {
+  createComponent(Constructor, targetSelector, getProps, tagName = 'div') {
     const $target = this.$target.querySelector(targetSelector);
     const props = getProps();
-    const component = new Constructor($target, props);
+    const component = new Constructor($target, props, tagName);
     this.addToChildren(targetSelector, getProps, component);
   }
   addToChildren(targetSelector, getProps, component) {

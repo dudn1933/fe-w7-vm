@@ -8,8 +8,8 @@ export default class Wallet extends Component {
   getTemplate() {
     const { title, count } = this.selfProps;
     return `
-      <li class="coin">${title}원</li>
-      <li class="coin_count">${count}</li>
+      <div class="coin">${title}원</div>
+      <div class="coin_count">${count}</div>
       `;
   }
   mountComponents() {}

@@ -16,10 +16,15 @@ export default class WalletView extends Component {
   mountComponents() {
     const { moneylist } = this.selfProps;
     moneylist.forEach((el) => {
-      this.createComponent(Wallet, '.wallet_line', () => {
-        const { title, count } = el;
-        return { title, count };
-      });
+      this.createComponent(
+        Wallet,
+        '.wallet_line',
+        () => {
+          const { title, count } = el;
+          return { title, count };
+        },
+        'li'
+      );
     });
     this.createComponent(Total, '.wallet_total', () => {
       const { moneylist } = this.selfProps;

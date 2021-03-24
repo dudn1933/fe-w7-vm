@@ -43,9 +43,9 @@ export default class App extends Deact {
     for (const money of moneylist) {
       if (money.title === type) {
         money.count--;
-      }``
+      }
+      ``;
     }
     this.updateState({ moneylist });
-    console.log(this.state);
   }
 }
