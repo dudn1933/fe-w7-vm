@@ -1,12 +1,11 @@
 import Component from '../../core/Component.js';
 import Wallet from './Wallet.js';
 import Total from './Total.js';
-import ScreenView from '../Screen/ScreenView.js';
 
 export default class WalletView extends Component {
   selectPropsToUse() {
-    const { moneylist, payMoney, totalMoney } = this.props;
-    this.selfProps = { moneylist, payMoney, totalMoney };
+    const { moneylist, payMoney, changeMoney, totalMoney } = this.props;
+    this.selfProps = { moneylist, payMoney, changeMoney, totalMoney };
   }
   getTemplate() {
     return `
@@ -35,10 +34,11 @@ export default class WalletView extends Component {
   }
 
   setEventLinstener() {
-    const { payMoney } = this.selfProps;
+    const { payMoney, changeMoney } = this.selfProps;
     this.addEventLinstener('click', '.coin', ({ target }) => {
       const type = target.innerText.replace(/[^0-9]/g, '');
       payMoney(type);
+      changeMoney(type);
     });
   }
 }
