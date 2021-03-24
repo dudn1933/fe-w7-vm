@@ -1,3 +1,7 @@
+.click_off {
+  pointer-events: none;
+}
+
 .entire_box {
   width: 100%;
   display: flex;
@@ -70,8 +74,11 @@
   width: 90%;
   height: 50px;
   margin: 10px 0;
+  padding-right: 20px;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  font-weight: bold;
+  font-size: 30px;
 }
 
 .btn {
@@ -158,4 +165,9 @@
   margin: 5px;
   box-sizing: border-box;
   border-radius: 10px;
+}
+
+.total_money {
+  font-weight: blod;
+  font-size: 30px;
 }

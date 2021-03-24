@@ -2,15 +2,7 @@ const randomNumber = () => {
   return Math.floor(Math.random() * 10);
 };
 const moneyList = () => {
-  const moneyType = [
-    '10',
-    '50',
-    '100',
-    '500',
-    '1000',
-    '5000',
-    '10000',
-  ];
+  const moneyType = ['10', '50', '100', '500', '1000', '5000', '10000'];
   const money = moneyType.map((v) => {
     return { title: v, count: randomNumber() };
   });

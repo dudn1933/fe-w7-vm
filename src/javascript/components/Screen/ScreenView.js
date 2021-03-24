@@ -3,8 +3,9 @@ import Component from '../../core/Component.js';
 export default class ScreenView extends Component {
   selectPropsToUse() {
     // this.props의 값으로 넘어온다. Component.js에서 내부동작.
-    const { summoney } = this.props;
-    this.selfProps = { summoney };
+    const { sumMoney } = this.props;
+    this.selfProps = { sumMoney };
+    console.log(this.selfProps);
   }
   getTemplate() {
     return `
@@ -13,11 +14,10 @@ export default class ScreenView extends Component {
      <textarea class="log"></textarea>
     `;
   }
-  mountComponents() {
-    // const { summoney } = this.selfProps;
-    // this.createComponent(Screen, '.won_screen', () => {
-    //   return summoney;
-    // });
+  mountComponents() {}
+  setEventLinstener() {
+    this.addEventLinstener('click', '.btn', ({ target }) => {
+      // won_screen에 있는 값을 나누어 지갑에 반환.
+    });
   }
-  setEventLinstener() {}
 }
