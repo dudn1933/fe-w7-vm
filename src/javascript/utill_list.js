@@ -21,18 +21,18 @@ const menuList = () => {
   let menuTitle = [
     '콜라',
     '사이다',
-    '파인애플 환타',
-    '포도 환타',
-    '레몬에이드',
+    '젤리',
+    '포도환타',
+    '레몬주스',
     '봉봉',
-    '코코아주스',
+    '코코아칩',
     '제로콜라',
-    '파워에이드',
+    '커피',
     '초코우유',
     '게토레이',
-    '포카리스웨이트',
+    '초콜릿',
     '딸바주스',
-    '바나나우유',
+    '바나나칩',
     '커피우유',
     '알로에',
     '콘칩',
@@ -70,6 +70,20 @@ const menuList = () => {
   return menu;
 };
 
-console.log(menuList());
+const sumMoney = () => {
+  const moneyType = [
+    '10원',
+    '50원',
+    '100원',
+    '500원',
+    '1000원',
+    '5000원',
+    '10000원',
+  ];
+  const money = moneyType.map((v) => {
+    return { title: v, count: randomNumber() };
+  });
+  return money;
+};
 
-export { menuList };
+export { menuList, sumMoney, moneyList };
