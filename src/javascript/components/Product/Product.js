@@ -1,4 +1,5 @@
 import Component from '../../core/Component.js';
+
 export default class Product extends Component {
   selectPropsToUse() {
     const { title, price, count } = this.props;

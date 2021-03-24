@@ -3,6 +3,7 @@ import Product from './Product.js';
 
 export default class ProductView extends Component {
   selectPropsToUse() {
+    // this.props의 값으로 menulist가 넘어온다. Component.js에서 내부동작.
     const { menulist } = this.props;
     this.selfProps = { menulist };
   }
