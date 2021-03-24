@@ -121,3 +121,8 @@
   box-sizing: border-box;
   margin: 10px 0;
 }
+
+.soldout {
+  border: 5px solid red;
+  pointer-events: none;
+}
