@@ -57,7 +57,6 @@ export default class App extends Deact {
     for (const money of moneylist) {
       if (money.title === type) {
         money.count--;
-        // this.state.selectMoney.push(money.title);
       }
     }
     this.updateState({ moneylist });
