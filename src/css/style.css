@@ -1,10 +1,12 @@
-#entire_box {
+.entire_box {
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: 100px;
 }
 
-#product_view {
+#Product_view {
+  display: flex;
   width: 33.3%;
   height: 500px;
   text-align: center;
@@ -12,6 +14,9 @@
 }
 
 .menu_line {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 25% 25% 25% 25%;
   box-sizing: border-box;
   width: 100%;
   list-style: none;
@@ -19,7 +24,8 @@
 }
 
 .menu_piece {
-  width: 20%;
+  padding: 0 5px;
+  margin: 10px 0;
 }
 
 .menu_box {
@@ -37,7 +43,7 @@
   width: 100%;
 }
 
-#screen_view {
+#Screen_view {
   width: 33.3%;
   height: 500px;
   text-align: -webkit-center;
@@ -69,40 +75,49 @@
   display: inline-block;
   box-sizing: border-box;
   width: 90%;
-  height: 250px;
+  height: 260px;
   padding: 10px 0;
 }
 
-#wallet_view {
+#Wallet_view {
+  display: flex;
   margin-left: 10px;
   border: 1px solid black;
   width: 20%;
-  height: 500px
+  height: 500px;
   text-align: center;
 }
 
 .wallet_line {
-  display: flex;
+  display: grid;
+  width: 100%;
+  justify-items: center;
+  grid-template-columns: 50% 50%;
   list-style: none;
   padding: 0 10px;
 }
 
 .coin {
-  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   height: 40px;
   background-color: transparent;
   border-radius: 10px;
-  margin-right: 5px;
   outline: none;
+  border: 2px solid black;
+  box-sizing: border-box;
+  margin: 10px 0;
 }
 .coin_count {
   display: flex;
-  width: 50%;
-  height: 40px;
   justify-content: center;
   align-items: center;
+  width: 70%;
+  height: 40px;
   border: 2px solid black;
   border-radius: 10px;
   box-sizing: border-box;
-  margin-left: 5px;
+  margin: 10px 0;
 }
