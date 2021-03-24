@@ -1,7 +1,7 @@
 export default class Deact {
   constructor($target) {
     this.$target = $target;
-    this.$self = document.createElement("div");
+    this.$self = document.createElement('div');
     this.props = null;
     this.children = [];
     this.createApp();
@@ -62,10 +62,10 @@ export default class Deact {
     return JSON.stringify(prevProps) !== JSON.stringify(nextProps);
   }
 
-  createComponent(Constructor, targetSelector, getProps) {
+  createComponent(Constructor, targetSelector, getProps, tagName = 'div') {
     const $target = this.$target.querySelector(targetSelector);
     const props = getProps();
-    const component = new Constructor($target, props);
+    const component = new Constructor($target, props, tagName);
     this.addToChildren(targetSelector, getProps, component);
   }
   addToChildren(targetSelector, getProps, component) {
@@ -84,7 +84,7 @@ export default class Deact {
   deepCopy(obj) {
     const clone = {};
     for (let key in obj) {
-      if (typeof obj[key] == "object" && obj[key] != null) {
+      if (typeof obj[key] == 'object' && obj[key] != null) {
         clone[key] = this.deepCopy(obj[key]);
       } else {
         clone[key] = obj[key];
