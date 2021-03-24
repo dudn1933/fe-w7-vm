@@ -81,6 +81,9 @@ export default class Deact {
     this.state = { ...this.state, ...newState };
     this.render();
   }
+  deepCopy2(obj) {
+    return JSON.parse(JSON.stringify(obj));
+  }
   deepCopy(obj) {
     const clone = {};
     for (let key in obj) {

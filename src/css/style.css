@@ -171,3 +171,8 @@
   font-weight: blod;
   font-size: 30px;
 }
+
+.soldout {
+  border: 5px solid red;
+  pointer-events: none;
+}

@@ -3,9 +3,8 @@ import Product from './Product.js';
 
 export default class ProductView extends Component {
   selectPropsToUse() {
-    // this.props의 값으로 menulist가 넘어온다. Component.js에서 내부동작.
-    const { menulist } = this.props;
-    this.selfProps = { menulist };
+    const { menulist, selectBeverage } = this.props;
+    this.selfProps = { menulist, selectBeverage };
   }
   getTemplate() {
     return `
@@ -16,10 +15,17 @@ export default class ProductView extends Component {
     const { menulist } = this.selfProps;
     menulist.forEach((el) => {
       this.createComponent(Product, '.menu_line', () => {
+        const { menulist } = this.selfProps;
         const { title, price, count } = el;
         return { title, price, count };
       });
     });
   }
-  setEventLinstener() {}
+  setEventLinstener() {
+    const { selectBeverage } = this.selfProps;
+    this.addEventLinstener('click', '.menu_box', ({ target }) => {
+      const name = target.innerText;
+      selectBeverage(name);
+    });
+  }
 }

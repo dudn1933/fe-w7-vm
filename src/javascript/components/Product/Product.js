@@ -6,12 +6,12 @@ export default class Product extends Component {
     this.selfProps = { title, price, count };
   }
   getTemplate() {
-    const { title, price } = this.selfProps;
+    const { title, price, count } = this.selfProps;
 
     return `
       <li class="menu_piece">
-        <div class="menu_box">${title}</div>
-        <div class="menu_price">${price}</div>
+        <div class="menu_box ${!count ? 'soldout' : ''}">${title}</div>
+        <div class="menu_price">${price} 원</div>
       </li>
       `;
   }
