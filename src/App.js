@@ -10,6 +10,7 @@ export default class App extends Deact {
       menulist: menuList(),
       summoney: sumMoney(),
       moneylist: moneyList(),
+      inputMoney: 10000,
     };
   }
 
@@ -49,12 +50,13 @@ export default class App extends Deact {
     this.updateState({ moneylist });
   }
   selectBeverage(name) {
-    const { menulist } = this.state;
+    let { menulist, inputMoney } = this.state;
     for (const beverage of menulist) {
-      if (beverage.title === name) {
+      if (beverage.title === name && beverage.price <= inputMoney) {
         beverage.count--;
+        inputMoney -= beverage.price;
       }
     }
-    this.updateState({ menulist });
+    this.updateState({ menulist, inputMoney });
   }
 }

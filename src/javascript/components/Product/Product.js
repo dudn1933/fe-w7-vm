@@ -11,7 +11,7 @@ export default class Product extends Component {
     return `
       <li class="menu_piece">
         <div class="menu_box ${!count ? 'soldout' : ''}">${title}</div>
-        <div class="menu_price">${price}</div>
+        <div class="menu_price">${price} 원</div>
       </li>
       `;
   }
