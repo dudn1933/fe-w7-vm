@@ -1,0 +1,123 @@
+.entire_box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+#Product_view {
+  display: flex;
+  width: 33.3%;
+  height: 500px;
+  text-align: center;
+  border: 1px solid black;
+}
+
+.menu_line {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 25% 25% 25% 25%;
+  box-sizing: border-box;
+  width: 100%;
+  list-style: none;
+  padding: 0 10px;
+}
+
+.menu_piece {
+  padding: 0 5px;
+  margin: 10px 0;
+}
+
+.menu_box {
+  display: flex;
+  box-sizing: border-box;
+  border: 1px solid black;
+  width: 100%;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu_price {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+#Screen_view {
+  width: 33.3%;
+  height: 500px;
+  text-align: -webkit-center;
+  border: 1px solid black;
+}
+
+.won_screen {
+  display: flex;
+  box-sizing: border-box;
+  border: 1px solid black;
+  width: 90%;
+  height: 50px;
+  margin: 10px 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 90%;
+  height: 50px;
+  background-color: transparent;
+  outline: none;
+  margin: 40px 0;
+}
+
+.log {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 90%;
+  height: 260px;
+  padding: 10px 0;
+}
+
+#Wallet_view {
+  display: flex;
+  margin-left: 10px;
+  border: 1px solid black;
+  width: 20%;
+  height: 500px;
+  text-align: center;
+}
+
+.wallet_line {
+  display: grid;
+  width: 100%;
+  justify-items: center;
+  grid-template-columns: 50% 50%;
+  list-style: none;
+  padding: 0 10px;
+}
+
+.coin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  background-color: transparent;
+  border-radius: 10px;
+  outline: none;
+  border: 2px solid black;
+  box-sizing: border-box;
+  margin: 10px 0;
+}
+.coin_count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  height: 40px;
+  border: 2px solid black;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin: 10px 0;
+}
