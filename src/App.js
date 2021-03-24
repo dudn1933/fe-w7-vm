@@ -22,6 +22,7 @@ export default class App extends Deact {
   }
 
   mountComponents() {
+    const { payMoney } = this;
     this.createComponent(ProductView, '#Product_view', () => {
       const { menulist } = this.state;
       return { menulist };
@@ -34,7 +35,17 @@ export default class App extends Deact {
 
     this.createComponent(WalletView, '#Wallet_view', () => {
       const { moneylist } = this.state;
-      return { moneylist };
+      return { moneylist, payMoney: payMoney.bind(this) };
     });
+  }
+  payMoney(type) {
+    const { moneylist } = this.state;
+    for (const money of moneylist) {
+      if (money.title === type) {
+        money.count--;
+      }``
+    }
+    this.updateState({ moneylist });
+    console.log(this.state);
   }
 }

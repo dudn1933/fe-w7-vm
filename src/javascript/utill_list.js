@@ -3,13 +3,13 @@ const randomNumber = () => {
 };
 const moneyList = () => {
   const moneyType = [
-    '10원',
-    '50원',
-    '100원',
-    '500원',
-    '1000원',
-    '5000원',
-    '10000원',
+    '10',
+    '50',
+    '100',
+    '500',
+    '1000',
+    '5000',
+    '10000',
   ];
   const money = moneyType.map((v) => {
     return { title: v, count: randomNumber() };

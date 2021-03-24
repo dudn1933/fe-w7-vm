@@ -5,7 +5,6 @@ export default class Component {
     this.$self = document.createElement('div');
     this.children = [];
     this.render($newtarget, newProps);
-    // this.mountComponents();
     this.setEventLinstener();
   }
   selectPropsToUse() {
@@ -34,7 +33,7 @@ export default class Component {
     }
 
     if (isDiffProps) {
-      this.$self.outerHTML = this.getTemplate();
+      this.$target.innerHTML = this.getTemplate();
       this.mountComponents();
     }
     // this.reRenderChildren();
@@ -66,11 +65,11 @@ export default class Component {
     });
   }
   addEventLinstener(eventType, selector, callback) {
-    const children = [...this.$self.querySelectorAll(selector)];
+    const children = [...this.$target.querySelectorAll(selector)];
     const isTarget = (target) => {
       return children.includes(target) || target.closest(selector);
     };
-    this.$self.addEventListener(eventType, (event) => {
+    this.$target.addEventListener(eventType, (event) => {
       if (!isTarget(event.target)) return false;
       callback(event);
     });
