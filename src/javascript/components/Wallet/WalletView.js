@@ -4,8 +4,8 @@ import Total from './Total.js';
 
 export default class WalletView extends Component {
   selectPropsToUse() {
-    const { moneylist, payMoney } = this.props;
-    this.selfProps = { moneylist, payMoney };
+    const { moneylist, payMoney, changeMoney, totalMoney } = this.props;
+    this.selfProps = { moneylist, payMoney, changeMoney, totalMoney };
   }
   getTemplate() {
     return `
@@ -27,15 +27,18 @@ export default class WalletView extends Component {
       );
     });
     this.createComponent(Total, '.wallet_total', () => {
-      const { moneylist } = this.selfProps;
-      return { moneylist };
+      const { totalMoney } = this.selfProps;
+      const totalmoney = totalMoney();
+      return { totalmoney };
     });
   }
+
   setEventLinstener() {
-    const { payMoney } = this.selfProps;
+    const { payMoney, changeMoney } = this.selfProps;
     this.addEventLinstener('click', '.coin', ({ target }) => {
       const type = target.innerText.replace(/[^0-9]/g, '');
       payMoney(type);
+      changeMoney(type);
     });
   }
 }

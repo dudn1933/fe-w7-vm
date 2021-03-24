@@ -8,7 +8,7 @@ export default class Wallet extends Component {
   getTemplate() {
     const { title, count } = this.selfProps;
     return `
-      <div class="coin">${title}원</div>
+      <div class="coin ${!count ? 'click_off' : ''}">${title}원</div>
       <div class="coin_count">${count}</div>
       `;
   }
