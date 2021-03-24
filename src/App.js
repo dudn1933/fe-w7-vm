@@ -26,8 +26,12 @@ export default class App extends Deact {
   mountComponents() {
     const { payMoney, selectBeverage, changeMoney } = this;
     this.createComponent(ProductView, '#Product_view', () => {
-      const { menulist } = this.state;
-      return { menulist, selectBeverage: selectBeverage.bind(this) };
+      const { menulist, selectMoney } = this.state;
+      return {
+        menulist,
+        selectMoney,
+        selectBeverage: selectBeverage.bind(this),
+      };
     });
 
     this.createComponent(ScreenView, '#Screen_view', () => {
@@ -57,7 +61,6 @@ export default class App extends Deact {
     for (const money of moneylist) {
       if (money.title === type) {
         money.count--;
-        // this.state.selectMoney.push(money.title);
       }
     }
     this.updateState({ moneylist });

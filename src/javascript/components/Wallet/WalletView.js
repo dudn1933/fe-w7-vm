@@ -27,7 +27,7 @@ export default class WalletView extends Component {
       );
     });
     this.createComponent(Total, '.wallet_total', () => {
-      const { totalMoney } = this.selfProps;
+      const { totalMoney } = this.props;
       const totalmoney = totalMoney();
       return { totalmoney };
     });
