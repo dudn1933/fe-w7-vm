@@ -11,19 +11,19 @@ export default class WalletView extends Component {
   }
   mountComponents() {
     const { wallet } = this.props;
-    wallet.forEach((el) => {
+    wallet.forEach((el, index) => {
       this.createComponent(
         Wallet,
         '.wallet_line',
         () => {
           const { wallet } = this.props;
-
-          const { name, count } = el;
+          const { name, count } = wallet[index];
           return { name, count };
         },
         'li'
       );
     });
+    
     this.createComponent(Total, '.wallet_total', () => {
       const { wallet } = this.props;
       return { wallet };
