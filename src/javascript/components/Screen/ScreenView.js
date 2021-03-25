@@ -18,7 +18,8 @@ export default class ScreenView extends Component {
   mountComponents() {}
   setEventLinstener() {
     this.addEventLinstener('click', '.btn', ({ target }) => {
-      // won_screen에 있는 값을 나누어 지갑에 반환.
+      const { selectMoney, returnMoney } = this.props;
+      returnMoney(selectMoney);
     });
   }
 }
