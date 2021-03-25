@@ -1,4 +1,6 @@
 .click_off {
+  opacity: 0.5;
+  border: 5px solid red;
   pointer-events: none;
 }
 
@@ -188,7 +190,7 @@
   background-color: transparent;
   border-radius: 10px;
   outline: none;
-  border: 2px solid black;
+  border: 3px solid black;
   box-sizing: border-box;
   margin: 10px 15px;
   transition: background-color 0.3s ease-in-out, transform 0.1s ease-in-out;
@@ -197,6 +199,7 @@
 }
 
 .coin:hover {
+  border-color: #797a7e;
   background-color: #797a7e;
   color: white;
 }
@@ -211,7 +214,7 @@
   align-items: center;
   width: 20%;
   height: 40px;
-  border: 2px solid black;
+  border: 3px solid black;
   border-radius: 10px;
   box-sizing: border-box;
   margin: 10px 15px;
