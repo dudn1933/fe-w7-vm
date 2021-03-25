@@ -1,6 +1,6 @@
 import Deact from './javascript/core/Deact.js';
 import { _ } from './javascript/utils/dom.js';
-import { menuList, sumMoney, moneyList } from './javascript/utill_list.js';
+import { menuList, moneyList } from './javascript/utill_list.js';
 import ProductView from './javascript/components/Product/ProductView.js';
 import ScreenView from './javascript/components/Screen/ScreenView.js';
 import WalletView from './javascript/components/Wallet/WalletView.js';
@@ -9,7 +9,6 @@ export default class App extends Deact {
   setup() {
     this.state = {
       menulist: menuList(),
-      summoney: sumMoney(),
       moneylist: moneyList(),
       selectMoney: 0,
     };

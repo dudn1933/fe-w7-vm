@@ -7,7 +7,7 @@ const __dirname = path.resolve();
 export default {
   mode: 'development',
   // entry == 밑에 주소에 있는것들을 번들하겠다. 라는 뜻이다.
-  entry: ['./src/javascript/index.js', './src/css/style.scss'],
+  entry: ['./src/main.js', './src/css/style.css'],
   devtool: 'inline-source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
