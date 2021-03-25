@@ -7,7 +7,6 @@ export default class Product extends Component {
   }
   getTemplate() {
     const { selectMoney, title, price, count } = this.selfProps;
-
     return `
       <li class="menu_piece">
         <div class="menu_box ${!count ? 'soldout' : ''} ${

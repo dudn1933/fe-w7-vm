@@ -3,8 +3,8 @@ import Component from '../../core/Component.js';
 export default class ScreenView extends Component {
   selectPropsToUse() {
     // this.props의 값으로 넘어온다. Component.js에서 내부동작.
-    const { selectMoney, record } = this.props;
-    this.selfProps = { selectMoney, record };
+    const { selectMoney, record, returnMoney } = this.props;
+    this.selfProps = { selectMoney, record, returnMoney };
   }
   getTemplate() {
     const { selectMoney, record } = this.selfProps;

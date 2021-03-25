@@ -13,8 +13,9 @@ export default class ProductView extends Component {
   }
   mountComponents() {
     const { menulist } = this.selfProps;
-    menulist.forEach(({ title, price, count }) => {
+    menulist.forEach((el) => {
       this.createComponent(Product, '.menu_line', () => {
+        const { title, price, count } = el;
         const { selectMoney } = this.props;
         return { selectMoney, title, price, count };
       });
