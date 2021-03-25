@@ -5,7 +5,6 @@ export default class ScreenView extends Component {
     // this.props의 값으로 넘어온다. Component.js에서 내부동작.
     const { selectMoney } = this.props;
     this.selfProps = { selectMoney };
-    console.log(this.selfProps);
   }
   getTemplate() {
     const { selectMoney } = this.selfProps;
