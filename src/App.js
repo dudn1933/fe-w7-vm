@@ -58,8 +58,10 @@ export default class App extends Deact {
     this.subtractMoneyFromWallet(unit);
     this.addToInputedMoney(unit);
 
-    const message = `${unit}원 투입!!`;
+    const message = `💲${unit} 투입💲`;
     this.insertMessageToBoard(message);
+    const chatLog = _.$('.log');
+    chatLog.scrollTop = chatLog.scrollHeight;
   }
   addToInputedMoney(unit) {
     const { inputedMoney } = this.state;
@@ -72,7 +74,6 @@ export default class App extends Deact {
 
     for (const money of newWallet) {
       if (money.name === unit) {
-        console.log('dis');
         money.count--;
       }
     }
@@ -87,26 +88,31 @@ export default class App extends Deact {
       if (beverage.name === name && beverage.price <= inputedMoney) {
         beverage.count--;
         inputedMoney -= beverage.price;
-        const message = `${beverage.name} 선택!!`;
+        const message = `✅${beverage.name} 선택✅`;
         this.insertMessageToBoard(message);
 
         setTimeout(() => {
-          const message = `${beverage.name} 나왔다!!`;
+          const message = `🍿${beverage.name} 나왔다🧃`;
           this.insertMessageToBoard(message);
         }, 2000);
       }
     }
     this.updateState({ menuList, inputedMoney });
+    const chatLog = _.$('.log');
+    chatLog.scrollTop = chatLog.scrollHeight;
   }
   insertMessageToBoard(message) {
     const { record } = this.state;
     const newRecord = [...record, message];
     this.updateState({ record: newRecord });
+    const chatLog = _.$('.log');
+    chatLog.scrollTop = chatLog.scrollHeight;
   }
 
   returnMoney() {
     let { wallet, inputedMoney } = this.state;
-    const message = `${inputedMoney} 반환!!`;
+    if (!inputedMoney) return;
+    const message = `💸${inputedMoney}반환💸`;
     this.insertMessageToBoard(message);
     const returnCoin = this.distributeCoin(inputedMoney);
     let newWallet = wallet;
@@ -115,6 +121,8 @@ export default class App extends Deact {
       (v, i) => (v = { name: v.name, count: v.count + returnCoin[i] })
     );
     this.updateState({ wallet: newWallet, inputedMoney });
+    const chatLog = _.$('.log');
+    chatLog.scrollTop = chatLog.scrollHeight;
   }
 
   distributeCoin(inputMoney) {

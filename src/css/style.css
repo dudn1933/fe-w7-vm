@@ -11,10 +11,12 @@
 
 #Product_view {
   display: flex;
-  width: 33.3%;
+  width: 25%;
   height: 500px;
   text-align: center;
   border: 1px solid black;
+  background-color: #e0ece4;
+  border-radius: 30px;
 }
 
 #Product_view > div {
@@ -30,6 +32,7 @@
   width: 100%;
   list-style: none;
   padding: 0 10px;
+  color: #797a7e;
 }
 
 .menu_piece {
@@ -40,12 +43,25 @@
 .menu_box {
   display: flex;
   box-sizing: border-box;
-  border: 1px solid black;
+  background-color: transparent;
+  border: 5px solid #797a7e;
   width: 100%;
   height: 50px;
+  font-size: 20px;
+  font-weight: bold;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+  transition: background-color 0.3s ease-in-out, transform 0.1s ease-in-out;
+}
+
+.menu_box:hover {
+  background-color: #797a7e;
+  color: white;
+}
+
+.menu_box:active {
+  transform: translateY(5px);
 }
 
 .menu_price {
@@ -56,11 +72,14 @@
 
 #Screen_view {
   display: flex;
+  margin: 0 40px;
   align-items: center;
-  width: 33.3%;
+  width: 20%;
   height: 500px;
   text-align: -webkit-center;
   border: 1px solid black;
+  background-color: #e0ece4;
+  border-radius: 30px;
 }
 
 #Screen_view > div {
@@ -79,6 +98,8 @@
   justify-content: flex-end;
   font-weight: bold;
   font-size: 30px;
+  color: black;
+  border-radius: 10px;
 }
 
 .btn {
@@ -88,24 +109,51 @@
   height: 50px;
   background-color: transparent;
   outline: none;
-  margin: 40px 0;
+  margin: 30px 0 20px 0;
+  font-size: 30px;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+  color: #797a7e;
+}
+
+.btn:hover {
+  background-color: rgb(53, 53, 53);
+  color: white;
+}
+
+.btn:active {
+  transform: translateY(2px);
 }
 
 .log {
   display: inline-block;
   box-sizing: border-box;
   width: 90%;
-  height: 260px;
-  padding: 10px 0;
+  height: 300px;
+  padding: 10px 10px;
+  font-size: 30px;
+  font-weight: bold;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: #eff9ff;
+  text-align: center;
+  overflow: scroll;
+  scrollbar-width: none;
+  pointer-events: none;
+}
+
+.log::-webkit-scrollbar {
+  display: none;
 }
 
 #Wallet_view {
   display: flex;
-  margin-left: 10px;
   border: 1px solid black;
-  width: 20%;
+  width: 15%;
   height: 500px;
   text-align: center;
+  border-radius: 30px;
+  background-color: #e0ece4;
 }
 
 #Wallet_view > div {
@@ -128,38 +176,54 @@
 .wallet_line > li {
   display: flex;
   width: 100%;
+  justify-content: center;
 }
 
 .coin {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 50%;
   height: 40px;
   background-color: transparent;
   border-radius: 10px;
   outline: none;
   border: 2px solid black;
   box-sizing: border-box;
-  margin: 10px 5px;
+  margin: 10px 15px;
+  transition: background-color 0.3s ease-in-out, transform 0.1s ease-in-out;
+  font-size: 20px;
+  font-weight: bold;
 }
+
+.coin:hover {
+  background-color: #797a7e;
+  color: white;
+}
+
+.coin:active {
+  transform: translateY(5px);
+}
+
 .coin_count {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 70%;
+  width: 20%;
   height: 40px;
   border: 2px solid black;
   border-radius: 10px;
   box-sizing: border-box;
-  margin: 10px 5px;
+  margin: 10px 15px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .wallet_total {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 90%;
+  width: 75%;
   height: 50px;
   border: 2px solid black;
   margin: 5px;
@@ -175,8 +239,14 @@
 .soldout {
   border: 5px solid red;
   pointer-events: none;
+  transition: background-color 0.3s ease-in-out;
 }
+.soldout:hover {
+  background-color: red;
+}
+
 .expensive {
   opacity: 0.5;
+  border: 5px solid;
   pointer-events: none;
 }
