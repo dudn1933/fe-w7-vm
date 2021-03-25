@@ -1,7 +1,7 @@
 import Deact from './javascript/core/Deact.js';
 import { _ } from './javascript/utils/dom.js';
 import { debounce } from './javascript/utils/fn.js';
-import { menuList, moneyList } from './javascript/utill_list.js';
+import { getMenuList, getWallet } from './javascript/utill_list.js';
 import ProductView from './javascript/components/Product/ProductView.js';
 import ScreenView from './javascript/components/Screen/ScreenView.js';
 import WalletView from './javascript/components/Wallet/WalletView.js';
@@ -9,11 +9,11 @@ import WalletView from './javascript/components/Wallet/WalletView.js';
 export default class App extends Deact {
   setup() {
     this.state = {
-      menulist: menuList(),
-      moneylist: moneyList(),
-      selectMoney: 0,
+      menuList: getMenuList(),
+      wallet: getWallet(),
+      inputedMoney: 0,
       record: [],
-      timer: debounce(() => {
+      resetTimer: debounce(() => {
         this.returnMoney();
       }, 5000),
     };
@@ -28,65 +28,76 @@ export default class App extends Deact {
   }
 
   mountComponents() {
-    const { payMoney, selectBeverage, inputMoney, returnMoney } = this;
+    const { selectBeverage, inputMoney, returnMoney } = this;
+
     this.createComponent(ProductView, '#Product_view', () => {
-      const { menulist, selectMoney } = this.state;
+      const { menuList, inputedMoney } = this.state;
       return {
-        menulist,
-        selectMoney,
+        menuList,
+        inputedMoney,
         selectBeverage: selectBeverage.bind(this),
       };
     });
 
     this.createComponent(ScreenView, '#Screen_view', () => {
-      const { selectMoney, record } = this.state;
-      return { selectMoney, record, returnMoney: returnMoney.bind(this) };
+      const { inputedMoney, record } = this.state;
+      return { inputedMoney, record, returnMoney: returnMoney.bind(this) };
     });
 
     this.createComponent(WalletView, '#Wallet_view', () => {
-      const { moneylist } = this.state;
-      const totalMoney = () => {
-        const total = this.state.moneylist.reduce((total, money) => {
-          return total + money.title * money.count;
-        }, 0);
-        return total;
-      };
+      const { wallet } = this.state;
+
       return {
-        moneylist,
-        payMoney: payMoney.bind(this),
+        wallet,
         inputMoney: inputMoney.bind(this),
-        totalMoney,
       };
     });
   }
 
-  payMoney(type) {
-    const { moneylist, timer } = this.state;
-    for (const money of moneylist) {
-      if (money.title === type) {
+  inputMoney(unit) {
+    this.subtractMoneyFromWallet(unit);
+    this.addToInputedMoney(unit);
+
+    const message = `💲${unit} 투입💲`;
+    this.insertMessageToBoard(message);
+    const chatLog = _.$('.log');
+    chatLog.scrollTop = chatLog.scrollHeight;
+  }
+  addToInputedMoney(unit) {
+    const { inputedMoney } = this.state;
+    this.updateState({ inputedMoney: inputedMoney + Number(unit) });
+  }
+  subtractMoneyFromWallet(unit) {
+    const { wallet, resetTimer } = this.state;
+    resetTimer();
+    const newWallet = this.deepCopy(wallet);
+
+    for (const money of newWallet) {
+      if (money.name === unit) {
         money.count--;
       }
     }
-    timer();
-    this.updateState({ moneylist });
+    this.updateState({ wallet: newWallet });
   }
   selectBeverage(name) {
-    let { menulist, selectMoney, record, timer } = this.state;
-    timer();
-    for (const beverage of menulist) {
-      if (beverage.title === name && beverage.price <= selectMoney) {
+    const { menuList, resetTimer } = this.state;
+    let { inputedMoney } = this.state;
+    resetTimer();
+    const newMenuList = this.deepCopy(menuList);
+    for (const beverage of newMenuList) {
+      if (beverage.name === name && beverage.price <= inputedMoney) {
         beverage.count--;
-        selectMoney -= beverage.price;
-        const message = `✅${beverage.title} 선택✅`;
+        inputedMoney -= beverage.price;
+        const message = `✅${beverage.name} 선택✅`;
         this.insertMessageToBoard(message);
 
         setTimeout(() => {
-          const message = `🍿${beverage.title} 나왔다🧃`;
+          const message = `🍿${beverage.name} 나왔다🧃`;
           this.insertMessageToBoard(message);
         }, 2000);
       }
     }
-    this.updateState({ menulist, selectMoney });
+    this.updateState({ menuList, inputedMoney });
     const chatLog = _.$('.log');
     chatLog.scrollTop = chatLog.scrollHeight;
   }
@@ -98,42 +109,26 @@ export default class App extends Deact {
     chatLog.scrollTop = chatLog.scrollHeight;
   }
 
-  // coin 클릭시 스크린 돈 변경
-  inputMoney(type) {
-    let { selectMoney } = this.state;
-    selectMoney += Number(type);
-    const message = `💲${type} 투입💲`;
-    this.insertMessageToBoard(message);
-    this.updateState({ selectMoney });
-    const chatLog = _.$('.log');
-    chatLog.scrollTop = chatLog.scrollHeight;
-  }
-
-  //반환누를시 0원으로 만들어주는 함수
   returnMoney() {
-    let { moneylist, selectMoney, timer } = this.state;
-    if (!selectMoney) return;
-    const message = `💸${selectMoney}반환💸`;
+    let { wallet, inputedMoney } = this.state;
+    if (!inputedMoney) return;
+    const message = `💸${inputedMoney}반환💸`;
     this.insertMessageToBoard(message);
-    // 코인이 [10, 50, 100, 500, 1000, 5000, 10000] 이순서대로 반환됨
-    // ex 58000원일 경우 [ 0, 0, 0, 0, 3, 1, 5]
-    const returnCoin = this.distributeCoin(selectMoney);
-    let newMoneyList = moneylist;
-    selectMoney -= Number(selectMoney);
-    newMoneyList = newMoneyList.map(
-      (v, i) => (v = { title: v.title, count: v.count + returnCoin[i] })
+    const returnCoin = this.distributeCoin(inputedMoney);
+    let newWallet = wallet;
+    inputedMoney -= Number(inputedMoney);
+    newWallet = newWallet.map(
+      (v, i) => (v = { name: v.name, count: v.count + returnCoin[i] })
     );
-
-    this.updateState({ moneylist: newMoneyList, selectMoney });
+    this.updateState({ wallet: newWallet, inputedMoney });
     const chatLog = _.$('.log');
     chatLog.scrollTop = chatLog.scrollHeight;
   }
 
-  //코인을 돌려주는 함수
   distributeCoin(inputMoney) {
-    let coinlist = [10000, 5000, 1000, 500, 100, 50, 10];
+    const coinlist = [10000, 5000, 1000, 500, 100, 50, 10];
     let remainder = inputMoney;
-    let result = [];
+    const result = [];
 
     coinlist.map((v) => {
       result.push(Math.floor(remainder / v));
