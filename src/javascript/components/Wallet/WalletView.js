@@ -8,7 +8,6 @@ export default class WalletView extends Component {
     this.selfProps = { moneylist, payMoney, inputMoney, totalMoney };
   }
   getTemplate() {
-    console.log(1);
     return `
      <ul class="wallet_line"></ul>
      <div class="wallet_total"></div>

@@ -10,8 +10,8 @@ export default class ScreenView extends Component {
     const { selectMoney, record } = this.selfProps;
 
     return `
-     <div class="won_screen">${selectMoney}원</div>
-     <button class="btn">반환</button>
+     <div class="won_screen">💰️${selectMoney}원</div>
+     <button class="btn">반&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;환</button>
      <textarea class="log">${record.join('\n')}</textarea>
     `;
   }

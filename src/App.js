@@ -77,37 +77,43 @@ export default class App extends Deact {
       if (beverage.title === name && beverage.price <= selectMoney) {
         beverage.count--;
         selectMoney -= beverage.price;
-        const message = `${beverage.title} 선택!!`;
+        const message = `✅${beverage.title} 선택✅`;
         this.insertMessageToBoard(message);
 
         setTimeout(() => {
-          const message = `${beverage.title} 나왔다!!`;
+          const message = `🍿${beverage.title} 나왔다🧃`;
           this.insertMessageToBoard(message);
         }, 2000);
       }
     }
     this.updateState({ menulist, selectMoney });
+    const chatLog = _.$('.log');
+    chatLog.scrollTop = chatLog.scrollHeight;
   }
   insertMessageToBoard(message) {
-    console.log(message);
     const { record } = this.state;
     const newRecord = [...record, message];
     this.updateState({ record: newRecord });
+    const chatLog = _.$('.log');
+    chatLog.scrollTop = chatLog.scrollHeight;
   }
 
   // coin 클릭시 스크린 돈 변경
   inputMoney(type) {
     let { selectMoney } = this.state;
     selectMoney += Number(type);
-    const message = `${type}원 투입!!`;
+    const message = `💲${type} 투입💲`;
     this.insertMessageToBoard(message);
     this.updateState({ selectMoney });
+    const chatLog = _.$('.log');
+    chatLog.scrollTop = chatLog.scrollHeight;
   }
 
   //반환누를시 0원으로 만들어주는 함수
   returnMoney() {
-    let { moneylist, selectMoney } = this.state;
-    const message = `${selectMoney} 반환!!`;
+    let { moneylist, selectMoney, timer } = this.state;
+    if (!selectMoney) return;
+    const message = `💸${selectMoney}반환💸`;
     this.insertMessageToBoard(message);
     // 코인이 [10, 50, 100, 500, 1000, 5000, 10000] 이순서대로 반환됨
     // ex 58000원일 경우 [ 0, 0, 0, 0, 3, 1, 5]
@@ -117,7 +123,10 @@ export default class App extends Deact {
     newMoneyList = newMoneyList.map(
       (v, i) => (v = { title: v.title, count: v.count + returnCoin[i] })
     );
+
     this.updateState({ moneylist: newMoneyList, selectMoney });
+    const chatLog = _.$('.log');
+    chatLog.scrollTop = chatLog.scrollHeight;
   }
 
   //코인을 돌려주는 함수
