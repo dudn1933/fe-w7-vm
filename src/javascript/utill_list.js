@@ -62,20 +62,4 @@ const menuList = () => {
   return menu;
 };
 
-const sumMoney = () => {
-  const moneyType = [
-    '10원',
-    '50원',
-    '100원',
-    '500원',
-    '1000원',
-    '5000원',
-    '10000원',
-  ];
-  const money = moneyType.map((v) => {
-    return { title: v, count: randomNumber() };
-  });
-  return money;
-};
-
-export { menuList, sumMoney, moneyList };
+export { menuList, moneyList };
