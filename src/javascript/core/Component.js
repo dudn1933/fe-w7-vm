@@ -28,13 +28,13 @@ export default class Component {
     }
 
     if (isDiffTarget) {
-      debugger;
       this.$target = $newTarget;
       this.$target.appendChild(this.$self);
     }
 
     if (isDiffProps) {
       this.$self.innerHTML = this.getTemplate();
+      this.children = [];
       this.mountComponents();
     }
     this.reRenderChildren();

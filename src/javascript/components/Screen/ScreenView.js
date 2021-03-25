@@ -19,7 +19,7 @@ export default class ScreenView extends Component {
   setEventLinstener() {
     this.addEventLinstener('click', '.btn', ({ target }) => {
       const { selectMoney, returnMoney } = this.props;
-      returnMoney(selectMoney);
+      returnMoney();
     });
   }
 }
