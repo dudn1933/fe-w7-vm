@@ -4,7 +4,6 @@ export default class Total extends Component {
   selectPropsToUse() {
     const { totalmoney } = this.props;
     this.selfProps = { totalmoney };
-    this.getTemplate();
   }
 
   getTemplate() {

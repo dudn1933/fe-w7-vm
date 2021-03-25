@@ -23,7 +23,7 @@ export default class App extends Deact {
   }
 
   mountComponents() {
-    const { payMoney, selectBeverage, changeMoney } = this;
+    const { payMoney, selectBeverage, inputMoney, returnMoney } = this;
     this.createComponent(ProductView, '#Product_view', () => {
       const { menulist, selectMoney } = this.state;
       return {
@@ -35,7 +35,8 @@ export default class App extends Deact {
 
     this.createComponent(ScreenView, '#Screen_view', () => {
       const { selectMoney } = this.state;
-      return { selectMoney };
+      //여기  Money에 새로운 함수 넣어주어야 함.
+      return { selectMoney, returnMoney: returnMoney.bind(this) };
     });
 
     this.createComponent(WalletView, '#Wallet_view', () => {
@@ -49,7 +50,7 @@ export default class App extends Deact {
       return {
         moneylist,
         payMoney: payMoney.bind(this),
-        changeMoney: changeMoney.bind(this),
+        inputMoney: inputMoney.bind(this),
         totalMoney,
       };
     });
@@ -75,9 +76,37 @@ export default class App extends Deact {
     this.updateState({ menulist, selectMoney });
   }
 
-  changeMoney(type) {
+  // coin 클릭시 스크린 돈 변경
+  inputMoney(type) {
     let { selectMoney } = this.state;
     selectMoney += Number(type);
     this.updateState({ selectMoney });
+  }
+
+  //반환누를시 0원으로 만들어주는 함수
+  returnMoney(inputMoney) {
+    let { moneylist, selectMoney } = this.state;
+    // 코인이 [10, 50, 100, 500, 1000, 5000, 10000] 이순서대로 반환됨
+    // ex 58000원일 경우 [ 0, 0, 0, 0, 3, 1, 5]
+    const returnCoin = this.distributeCoin(inputMoney);
+    let newMoneyList = moneylist;
+    selectMoney -= Number(inputMoney);
+    newMoneyList = newMoneyList.map(
+      (v, i) => (v = { title: v.title, count: v.count + returnCoin[i] })
+    );
+    this.updateState({ moneylist: newMoneyList, selectMoney });
+  }
+
+  //코인을 돌려주는 함수
+  distributeCoin(inputMoney) {
+    let coinlist = [10000, 5000, 1000, 500, 100, 50, 10];
+    let remainder = inputMoney;
+    let result = [];
+
+    coinlist.map((v) => {
+      result.push(Math.floor(remainder / v));
+      remainder = remainder % v;
+    });
+    return result.reverse();
   }
 }
