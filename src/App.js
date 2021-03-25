@@ -14,8 +14,8 @@ export default class App extends Deact {
       selectMoney: 0,
       record: [],
       timer: debounce(() => {
-        console.log('time out!');
-      }, 2000),
+        this.returnMoney();
+      }, 5000),
     };
   }
 
@@ -71,22 +71,27 @@ export default class App extends Deact {
     this.updateState({ moneylist });
   }
   selectBeverage(name) {
-    let { menulist, selectMoney, record } = this.state;
+    let { menulist, selectMoney, record, timer } = this.state;
+    timer();
     for (const beverage of menulist) {
       if (beverage.title === name && beverage.price <= selectMoney) {
         beverage.count--;
         selectMoney -= beverage.price;
-        record.push(`${beverage.title} 선택!!`);
+        const message = `${beverage.title} 선택!!`;
+        this.insertMessageToBoard(message);
+
         setTimeout(() => {
-          this.returnBeverage(beverage.title);
+          const message = `${beverage.title} 나왔다!!`;
+          this.insertMessageToBoard(message);
         }, 2000);
       }
     }
-    this.updateState({ menulist, selectMoney, record });
+    this.updateState({ menulist, selectMoney });
   }
-  returnBeverage(beverage) {
+  insertMessageToBoard(message) {
+    console.log(message);
     const { record } = this.state;
-    const newRecord = [...record, `${beverage} 반환`];
+    const newRecord = [...record, message];
     this.updateState({ record: newRecord });
   }
 
@@ -94,17 +99,21 @@ export default class App extends Deact {
   inputMoney(type) {
     let { selectMoney } = this.state;
     selectMoney += Number(type);
+    const message = `${type}원 투입!!`;
+    this.insertMessageToBoard(message);
     this.updateState({ selectMoney });
   }
 
   //반환누를시 0원으로 만들어주는 함수
-  returnMoney(inputMoney) {
+  returnMoney() {
     let { moneylist, selectMoney } = this.state;
+    const message = `${selectMoney} 반환!!`;
+    this.insertMessageToBoard(message);
     // 코인이 [10, 50, 100, 500, 1000, 5000, 10000] 이순서대로 반환됨
     // ex 58000원일 경우 [ 0, 0, 0, 0, 3, 1, 5]
-    const returnCoin = this.distributeCoin(inputMoney);
+    const returnCoin = this.distributeCoin(selectMoney);
     let newMoneyList = moneylist;
-    selectMoney -= Number(inputMoney);
+    selectMoney -= Number(selectMoney);
     newMoneyList = newMoneyList.map(
       (v, i) => (v = { title: v.title, count: v.count + returnCoin[i] })
     );
