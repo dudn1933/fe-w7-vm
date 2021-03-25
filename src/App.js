@@ -1,5 +1,6 @@
 import Deact from './javascript/core/Deact.js';
 import { _ } from './javascript/utils/dom.js';
+import { debounce } from './javascript/utils/fn.js';
 import { menuList, moneyList } from './javascript/utill_list.js';
 import ProductView from './javascript/components/Product/ProductView.js';
 import ScreenView from './javascript/components/Screen/ScreenView.js';
@@ -11,6 +12,10 @@ export default class App extends Deact {
       menulist: menuList(),
       moneylist: moneyList(),
       selectMoney: 0,
+      record: [],
+      timer: debounce(() => {
+        console.log('time out!');
+      }, 2000),
     };
   }
 
@@ -34,9 +39,8 @@ export default class App extends Deact {
     });
 
     this.createComponent(ScreenView, '#Screen_view', () => {
-      const { selectMoney } = this.state;
-      //여기  Money에 새로운 함수 넣어주어야 함.
-      return { selectMoney, returnMoney: returnMoney.bind(this) };
+      const { selectMoney, record } = this.state;
+      return { selectMoney, record, returnMoney: returnMoney.bind(this) };
     });
 
     this.createComponent(WalletView, '#Wallet_view', () => {
@@ -57,23 +61,33 @@ export default class App extends Deact {
   }
 
   payMoney(type) {
-    const { moneylist } = this.state;
+    const { moneylist, timer } = this.state;
     for (const money of moneylist) {
       if (money.title === type) {
         money.count--;
       }
     }
+    timer();
     this.updateState({ moneylist });
   }
   selectBeverage(name) {
-    let { menulist, selectMoney } = this.state;
+    let { menulist, selectMoney, record } = this.state;
     for (const beverage of menulist) {
       if (beverage.title === name && beverage.price <= selectMoney) {
         beverage.count--;
         selectMoney -= beverage.price;
+        record.push(`${beverage.title} 선택!!`);
+        setTimeout(() => {
+          this.returnBeverage(beverage.title);
+        }, 2000);
       }
     }
-    this.updateState({ menulist, selectMoney });
+    this.updateState({ menulist, selectMoney, record });
+  }
+  returnBeverage(beverage) {
+    const { record } = this.state;
+    const newRecord = [...record, `${beverage} 반환`];
+    this.updateState({ record: newRecord });
   }
 
   // coin 클릭시 스크린 돈 변경
