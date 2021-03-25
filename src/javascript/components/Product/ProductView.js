@@ -9,9 +9,10 @@ export default class ProductView extends Component {
   }
   mountComponents() {
     const { menuList } = this.props;
-    menuList.forEach((el) => {
+    menuList.forEach((el, index) => {
       this.createComponent(Product, '.menu_line', () => {
-        const { name, price, count } = el;
+        const { menuList } = this.props;
+        const { name, price, count } = menuList[index];
         const { inputedMoney } = this.props;
         return { inputedMoney, name, price, count };
       });
