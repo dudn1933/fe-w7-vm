@@ -11,6 +11,7 @@ export default class App extends Deact {
       menulist: menuList(),
       moneylist: moneyList(),
       selectMoney: 0,
+      record: [],
     };
   }
 
@@ -34,8 +35,8 @@ export default class App extends Deact {
     });
 
     this.createComponent(ScreenView, '#Screen_view', () => {
-      const { selectMoney } = this.state;
-      return { selectMoney };
+      const { selectMoney, record } = this.state;
+      return { selectMoney, record };
     });
 
     this.createComponent(WalletView, '#Wallet_view', () => {
@@ -65,14 +66,21 @@ export default class App extends Deact {
     this.updateState({ moneylist });
   }
   selectBeverage(name) {
-    let { menulist, selectMoney } = this.state;
+    let { menulist, selectMoney, record } = this.state;
     for (const beverage of menulist) {
       if (beverage.title === name && beverage.price <= selectMoney) {
         beverage.count--;
         selectMoney -= beverage.price;
+        record.push(`${beverage.title} 선택!!`);
+        setTimeout(() => {
+          const { record } = this.state;
+          const newRecord = [...record, `${beverage.title} 반환!!`];
+          this.updateState({ record: newRecord });
+        }, 2000);
       }
     }
-    this.updateState({ menulist, selectMoney });
+
+    this.updateState({ menulist, selectMoney, record });
   }
 
   changeMoney(type) {

@@ -64,6 +64,7 @@ export default class Component {
       component.render($target, getProps());
     });
   }
+  
   addEventLinstener(eventType, selector, callback) {
     const children = [...this.$target.querySelectorAll(selector)];
     const isTarget = (target) => {
