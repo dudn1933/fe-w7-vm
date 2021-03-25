@@ -2,27 +2,23 @@ import Component from '../../core/Component.js';
 import Product from './Product.js';
 
 export default class ProductView extends Component {
-  selectPropsToUse() {
-    const { menulist, selectBeverage } = this.props;
-    this.selfProps = { menulist, selectBeverage };
-  }
   getTemplate() {
     return `
      <ul class="menu_line"></ul>
     `;
   }
   mountComponents() {
-    const { menulist } = this.selfProps;
-    menulist.forEach((el) => {
+    const { menuList } = this.props;
+    menuList.forEach((el) => {
       this.createComponent(Product, '.menu_line', () => {
-        const { title, price, count } = el;
-        const { selectMoney } = this.props;
-        return { selectMoney, title, price, count };
+        const { name, price, count } = el;
+        const { inputedMoney } = this.props;
+        return { inputedMoney, name, price, count };
       });
     });
   }
   setEventLinstener() {
-    const { selectBeverage } = this.selfProps;
+    const { selectBeverage } = this.props;
     this.addEventLinstener('click', '.menu_box', ({ target }) => {
       const name = target.innerText;
       selectBeverage(name);

@@ -2,15 +2,20 @@ import Component from '../../core/Component.js';
 
 export default class Total extends Component {
   selectPropsToUse() {
-    const { totalmoney } = this.props;
-    this.selfProps = { totalmoney };
+    const { wallet } = this.props;
+    this.selfProps = { wallet };
   }
 
   getTemplate() {
-    const { totalmoney } = this.selfProps;
-
+    const { wallet } = this.selfProps;
+    const totalMoney = this.getTotalMoney(wallet);
     return `
-        <div class="total_money">${totalmoney}원</div>
+        <div class="total_money">${totalMoney}원</div>
       `;
+  }
+  getTotalMoney(wallet) {
+    return wallet.reduce((total, money) => {
+      return total + money.name * money.count;
+    }, 0);
   }
 }
