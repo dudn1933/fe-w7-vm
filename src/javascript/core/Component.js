@@ -19,6 +19,7 @@ export default class Component {
   setEventLinstener() {
     //addEventLinstener를 사용해서 self에 이벤트를 위임하세요.
   }
+  componentDidMount() {}
   render($newTarget, newProps) {
     const isDiffTarget = this.isDiffTarget($newTarget);
     const isDiffProps = this.isDiffProps(newProps);
@@ -37,6 +38,7 @@ export default class Component {
       this.children = [];
       this.mountComponents();
     }
+    this.componentDidMount();
     this.reRenderChildren();
   }
   isDiffTarget($newTarget) {

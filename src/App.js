@@ -60,8 +60,6 @@ export default class App extends Deact {
 
     const message = `💲${unit} 투입💲`;
     this.insertMessageToBoard(message);
-    const chatLog = _.$('.log');
-    chatLog.scrollTop = chatLog.scrollHeight;
   }
   addToInputedMoney(unit) {
     const { inputedMoney } = this.state;
@@ -98,15 +96,11 @@ export default class App extends Deact {
       }
     }
     this.updateState({ menuList, inputedMoney });
-    const chatLog = _.$('.log');
-    chatLog.scrollTop = chatLog.scrollHeight;
   }
   insertMessageToBoard(message) {
     const { record } = this.state;
     const newRecord = [...record, message];
     this.updateState({ record: newRecord });
-    const chatLog = _.$('.log');
-    chatLog.scrollTop = chatLog.scrollHeight;
   }
 
   returnMoney() {
@@ -121,8 +115,6 @@ export default class App extends Deact {
       (v, i) => (v = { name: v.name, count: v.count + returnCoin[i] })
     );
     this.updateState({ wallet: newWallet, inputedMoney });
-    const chatLog = _.$('.log');
-    chatLog.scrollTop = chatLog.scrollHeight;
   }
 
   distributeCoin(inputMoney) {
