@@ -1,4 +1,5 @@
 import Component from '../../core/Component.js';
+import { _ } from '../../utils/dom.js';
 
 export default class ScreenView extends Component {
   selectPropsToUse() {
@@ -14,6 +15,10 @@ export default class ScreenView extends Component {
      <button class="btn">반&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;환</button>
      <textarea class="log">${record.join('\n')}</textarea>
     `;
+  }
+  componentDidMount() {
+    const chatLog = _.$('.log');
+    chatLog.scrollTop = chatLog.scrollHeight;
   }
   setEventLinstener() {
     this.addEventLinstener('click', '.btn', ({ target }) => {

@@ -16,6 +16,7 @@ export default class Component {
   mountComponents() {
     // createChildComponent 함수에 생성자, targetSelector, getPropsFunction을 인자로 전달해서 실행하세요.
   }
+  componentDidMount() {}
   setEventLinstener() {
     //addEventLinstener를 사용해서 self에 이벤트를 위임하세요.
   }
@@ -37,6 +38,7 @@ export default class Component {
       this.children = [];
       this.mountComponents();
     }
+    this.componentDidMount();
     this.reRenderChildren();
   }
   isDiffTarget($newTarget) {
