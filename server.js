@@ -4,6 +4,7 @@ import cors from 'cors';
 
 const server = express();
 const port = 3000;
+
 const __dirname = path.resolve();
 
 server.use(cors());
